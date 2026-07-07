@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scam Detector</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="brand-mark">◎</span>
+        <span class="brand-name">Scam Detector</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
+      </nav>
+      <a class="nav-cta" href="#demo">Try the demo</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Voice intelligence for fraud prevention</p>
+        <h1>Hear an accent. <span class="accent">Find its origin.</span></h1>
+        <p class="hero-sub">
+          Scam Detector listens to English speech and estimates the speaker's likely country of origin —
+          helping you spot mismatches between who a caller claims to be and how they actually sound.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#demo">Start listening</a>
+          <a class="btn btn-ghost" href="#how-it-works">See how it works</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="wave">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Capture speech</h3>
+          <p>Record or upload a short clip of someone speaking English.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Analyze the accent</h3>
+          <p>Our model breaks down pronunciation, rhythm, and intonation patterns.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Estimate origin</h3>
+          <p>Get a ranked list of the countries the accent most closely matches.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Flag mismatches</h3>
+          <p>Compare against a claimed identity or location to surface red flags.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section section-alt">
+      <h2>Why it matters</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Fraud prevention</h3>
+          <p>Catch impersonation and social engineering attempts where a caller's story doesn't match their voice.</p>
+        </div>
+        <div class="card">
+          <h3>Fast &amp; lightweight</h3>
+          <p>Get a result from just a few seconds of speech — no long calls required.</p>
+        </div>
+        <div class="card">
+          <h3>Privacy-minded</h3>
+          <p>Analyze accents locally without storing raw audio any longer than necessary.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="section demo">
+      <h2>Try it out</h2>
+      <p class="demo-sub">This is a placeholder demo — plug in your speech analysis model here.</p>
+      <div class="demo-box">
+        <button id="recordBtn" class="btn btn-primary" type="button">🎙️ Start recording</button>
+        <p id="demoResult" class="demo-result">No analysis yet. Click the button to simulate a scan.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Scam Detector — Hackertone 2026 project</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
