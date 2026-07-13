@@ -90,10 +90,11 @@
 
     <section id="demo" class="section demo">
       <h2>Try it out</h2>
-      <p class="demo-sub">This is a placeholder demo — plug in your speech analysis model here.</p>
+      <p class="demo-sub">6초간 영어로 말하면 Step 1(합성음 판별)과 Step 2(억양 추정)를 실행합니다. 백엔드에 연결할 수 없으면 시뮬레이션 결과로 대체됩니다.</p>
       <div class="demo-box">
         <button id="recordBtn" class="btn btn-primary" type="button">🎙️ Start recording</button>
-        <p id="demoResult" class="demo-result">No analysis yet. Click the button to simulate a scan.</p>
+        <p id="demoResult" class="demo-result">No analysis yet. Click the button to start a scan.</p>
+        <pre id="demoDetail" class="demo-detail"></pre>
       </div>
     </section>
   </main>
@@ -102,6 +103,7 @@
     <p>Scam Detector — Hackertone 2026 project</p>
   </footer>
 
+  <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

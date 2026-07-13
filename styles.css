@@ -276,6 +276,24 @@ h1 .accent { color: var(--accent); }
   font-size: 0.95rem;
 }
 
+.demo-detail {
+  margin: 16px 0 0;
+  padding: 16px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-align: left;
+  font-family: "Cascadia Code", "Consolas", monospace;
+  font-size: 0.82rem;
+  color: var(--text);
+  white-space: pre-wrap;
+  min-height: 0;
+}
+
+.demo-detail:empty {
+  display: none;
+}
+
 .footer {
   text-align: center;
   padding: 30px 24px;
