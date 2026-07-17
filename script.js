@@ -25,7 +25,7 @@ async function runAnalysis() {
   clearDetail();
 
   if (!navigator.mediaDevices || !window.MediaRecorder) {
-    demoResult.textContent = "이 브라우저는 마이크 녹음을 지원하지 않습니다. 시뮬레이션 결과를 표시합니다.";
+    demoResult.textContent = "This browser doesn't support microphone recording. Showing a simulated result.";
     await sleep(600);
     showMockResult();
     busy = false;
@@ -36,7 +36,7 @@ async function runAnalysis() {
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   } catch (err) {
-    demoResult.textContent = "마이크 권한이 필요합니다. 시뮬레이션 결과를 표시합니다.";
+    demoResult.textContent = "Microphone permission is required. Showing a simulated result.";
     showMockResult();
     busy = false;
     return;
@@ -44,18 +44,18 @@ async function runAnalysis() {
 
   try {
     recordBtn.textContent = "🎙️ Recording...";
-    demoResult.textContent = `${RECORD_MS / 1000}초간 말해주세요...`;
+    demoResult.textContent = `Speak now for ${RECORD_MS / 1000} seconds...`;
 
     const wavBlob = await recordAsWav(stream, RECORD_MS);
 
     recordBtn.textContent = "🎧 Analyzing...";
-    demoResult.textContent = "분석 중...";
+    demoResult.textContent = "Analyzing...";
 
     const result = await sendForAnalysis(wavBlob);
     renderResult(result);
   } catch (err) {
     console.error(err);
-    demoResult.textContent = "분석 서버에 연결할 수 없어 시뮬레이션 결과를 표시합니다.";
+    demoResult.textContent = "Couldn't reach the analysis server. Showing a simulated result.";
     showMockResult();
   } finally {
     stream.getTracks().forEach((t) => t.stop());
@@ -180,7 +180,7 @@ async function sendForAnalysis(wavBlob) {
 }
 
 function renderResult(result) {
-  demoResult.textContent = result.verdict || "분석 완료";
+  demoResult.textContent = result.verdict || "Analysis complete";
 
   const lines = [];
   const step1 = result.step1;
@@ -201,7 +201,7 @@ function renderResult(result) {
     });
     lines.push(`  · confidence: ${step2.confidence_level} (voiced ${step2.voiced_duration_sec}s)`);
   } else if (step2 && step2.status === "insufficient_data") {
-    lines.push("Step 2 — 판단 보류 (발화 길이/음성 구간 부족)");
+    lines.push("Step 2 — Inconclusive (insufficient speech length/voiced content)");
   }
 
   demoDetail.textContent = lines.join("\n");
@@ -209,8 +209,8 @@ function renderResult(result) {
 
 function showMockResult() {
   const pick = sampleOrigins[Math.floor(Math.random() * sampleOrigins.length)];
-  demoResult.textContent = `[시뮬레이션] Likely origin: ${pick.country} (${pick.confidence}% confidence)`;
-  demoDetail.textContent = "백엔드 미연결 상태의 예시 결과입니다.";
+  demoResult.textContent = `[Simulated] Likely origin: ${pick.country} (${pick.confidence}% confidence)`;
+  demoDetail.textContent = "Example result shown while the backend is not connected.";
 }
 
 function clearDetail() {

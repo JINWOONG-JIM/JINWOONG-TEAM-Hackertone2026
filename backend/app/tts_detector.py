@@ -29,31 +29,31 @@ def detect_synthetic(features: FeatureSet) -> dict:
         return {
             "label": "unknown",
             "confidence": 0.0,
-            "reasons": ["유효 음성 구간이 너무 짧아 판별할 수 없음"],
+            "reasons": ["Not enough voiced speech to make a determination"],
             "metrics": _metrics(features),
         }
 
     if features.jitter < JITTER_LOW:
         score += WEIGHTS["jitter"]
-        reasons.append("pitch jitter가 비정상적으로 낮음 (자연스러운 성대 떨림 부족)")
+        reasons.append("Pitch jitter is abnormally low (lacks natural vocal-fold variation)")
 
     if features.shimmer < SHIMMER_LOW:
         score += WEIGHTS["shimmer"]
-        reasons.append("amplitude shimmer가 비정상적으로 낮음")
+        reasons.append("Amplitude shimmer is abnormally low")
 
     if features.silence_rms_std < SILENCE_STD_LOW:
         score += WEIGHTS["silence"]
-        reasons.append("배경 노이즈가 비정상적으로 규칙적/깨끗함")
+        reasons.append("Background noise is abnormally uniform/clean")
 
     if features.hf_energy_std < HF_STD_LOW:
         score += WEIGHTS["hf_artifact"]
-        reasons.append("고주파 대역 에너지 패턴이 인위적으로 균일함")
+        reasons.append("High-frequency energy pattern is artificially uniform")
 
     is_synthetic = score >= 0.5
     confidence = round((score if is_synthetic else 1 - score) * 100, 1)
 
     if not reasons:
-        reasons.append("자연스러운 성대/배경 노이즈 변동이 관측됨")
+        reasons.append("Natural vocal-fold and background-noise variation observed")
 
     return {
         "label": "synthetic" if is_synthetic else "human",

@@ -43,20 +43,20 @@ async def analyze(file: UploadFile = File(...)):
     result = {"step1": step1, "step2": None}
 
     if step1["label"] == "synthetic":
-        result["verdict"] = "합성(TTS) 음성 의심 — 억양 추정은 사람 음성이 아니므로 수행하지 않음"
+        result["verdict"] = "Synthetic (TTS) voice suspected — accent estimation skipped since it isn't a human voice"
         return result
 
     if step1["label"] == "unknown":
-        result["verdict"] = "판별 불가 — 유효 음성 구간 부족"
+        result["verdict"] = "Unable to determine — insufficient voiced speech"
         return result
 
     step2 = estimate_accent(features)
     result["step2"] = step2
 
     if step2["status"] == "insufficient_data":
-        result["verdict"] = "사람 음성 / 발화 길이·음성 구간 부족으로 억양 추정 보류"
+        result["verdict"] = "Human voice / accent estimation withheld due to insufficient speech length or voiced content"
     else:
         top = step2["distribution"][0]
-        result["verdict"] = f"사람 음성 / {top['label']} 가능성 높음 ({top['probability']}%)"
+        result["verdict"] = f"Human voice / likely {top['label']} ({top['probability']}%)"
 
     return result
