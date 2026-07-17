@@ -1,5 +1,5 @@
 const API_BASE = window.VOICEORIGIN_API_BASE || "https://voiceorigin-api.onrender.com";
-const RECORD_MS = 6000;
+const RECORD_MS = 8000;
 
 const recordBtn = document.getElementById("recordBtn");
 const demoResult = document.getElementById("demoResult");
